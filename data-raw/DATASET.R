@@ -40,6 +40,9 @@ cid_capitulos <- read_delim(file = "data-raw/CID-10-CAPITULOS.CSV", delim = ";",
 
 
 
+# Categorias --------------------------------------------------------------
+
+
 # carregamento
 cid_categorias <- read_delim(file = "data-raw/CID-10-CATEGORIAS.CSV", delim = ";",
                             locale = locale(encoding = "Windows-1252")) %>%
@@ -48,6 +51,65 @@ cid_categorias <- read_delim(file = "data-raw/CID-10-CATEGORIAS.CSV", delim = ";
 
 
 
+# Grupos ------------------------------------------------------------------
+
+# carregamento
+cid_grupos <- read_delim(file = "data-raw/CID-10-GRUPOS.CSV", delim = ";",
+                             locale = locale(encoding = "Windows-1252")) %>%
+  clean_names() %>%
+  select(-x5)
+
+
+
+# Subcategorias -----------------------------------------------------------
+
+
+# carregamento
+cid_subcat <- read_delim(file = "data-raw/CID-10-SUBCATEGORIAS.CSV", delim = ";",
+                         locale = locale(encoding = "Windows-1252")) %>%
+  clean_names() %>%
+  select(-x9) %>%
+  mutate(
+    subcat_ord = fct_inorder(subcat, ordered = TRUE),
+    indice = 1:nrow(.)
+  )
+
+
+
+
+# Função cid_range --------------------------------------------------------
+
+cid_range <- function(cat_sup, cat_inf) {
+
+  indice_sup <- cid_subcat %>%
+    filter(grepl(cat_sup, subcat)) %>%
+    pull(indice) %>% min
+
+  indice_inf <- cid_subcat %>%
+    filter(grepl(cat_inf, subcat)) %>%
+    pull(indice) %>% max
+
+  if(indice_sup > indice_inf) {
+    return("Categoria superior é menor que a inferior")
+  }
+  cid_subcat %>%
+    slice(indice_sup:indice_inf)
+
+}
+
+
+cid_capitulos %>%
+  mutate(
+    cids = map2(.x = catinic, .y = catfim, ~ cid_range(.x,.y))
+  )
+cid_subcat %>%
+  filter(grepl("I", subcat)) %>% view
+
+
+cid_range("I00", "I") %>% view
+cid_subcat %>%
+  filter(grepl("I99", subcat)) %>%
+  pull(indice) %>% min
 
 ## code to prepare `DATASET` dataset goes here
 
