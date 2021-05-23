@@ -1,0 +1,19 @@
+Package: cid10
+Type: Package
+Title: Tabelas do CID10 (cid10)
+Version: 0.1.0
+Author: Márcio da Silveira Rodrigues
+Maintainer: Márcio da Silveira Rodrigues <msrodrigues@gmail.com>
+Description: Classificação Internacional de Doenças - 10 versão
+    A Classificação Estatística Internacional de Doenças e Problemas Relacionados 
+    com a Saúde (CID; em inglês: International Statistical Classification of 
+    Diseases and Related Health Problems, ICD) determina a 
+    classificação e codificação das doenças e uma ampla variedade de sinais, 
+    sintomas, achados anormais, denúncias, circunstâncias sociais e causas 
+    externas de danos e/ou doença.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Depends: 
+    R (>= 2.10)
+RoxygenNote: 7.1.1
