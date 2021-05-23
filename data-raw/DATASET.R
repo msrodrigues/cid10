@@ -76,7 +76,6 @@ cid_subcat <- read_delim(file = "data-raw/CID-10-SUBCATEGORIAS.CSV", delim = ";"
 
 
 
-
 # Função cid_range --------------------------------------------------------
 
 cid_range <- function(cat_sup, cat_inf) {
@@ -101,14 +100,14 @@ cid_range <- function(cat_sup, cat_inf) {
 cid_capitulos %>%
   mutate(
     cids = map2(.x = catinic, .y = catfim, ~ cid_range(.x,.y))
-  )
+  ) %>% view
 cid_subcat %>%
   filter(grepl("I", subcat)) %>% view
 
 
 cid_range("I00", "I") %>% view
 cid_subcat %>%
-  filter(grepl("I99", subcat)) %>%
+  filter(grepl("I48", subcat)) %>%
   pull(indice) %>% min
 
 ## code to prepare `DATASET` dataset goes here
