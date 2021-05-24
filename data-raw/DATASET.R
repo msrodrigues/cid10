@@ -97,21 +97,10 @@ cid_range <- function(cat_sup, cat_inf) {
 }
 
 
-cid_capitulos %>%
-  mutate(
-    cids = map2(.x = catinic, .y = catfim, ~ cid_range(.x,.y))
-  ) %>% view
-cid_subcat %>%
-  filter(grepl("I", subcat)) %>% view
-
-
-cid_range("I00", "I") %>% view
-cid_subcat %>%
-  filter(grepl("I48", subcat)) %>%
-  pull(indice) %>% min
-
 ## code to prepare `DATASET` dataset goes here
 
 usethis::use_data(cid_capitulos, overwrite = TRUE)
 usethis::use_data(cid_categorias, overwrite = TRUE)
+usethis::use_data(cid_grupos, overwrite = TRUE)
+usethis::use_data(cid_subcat, overwrite = TRUE)
 
