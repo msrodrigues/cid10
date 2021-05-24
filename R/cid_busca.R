@@ -5,8 +5,6 @@
 #'
 #' @export
 
-
-
 cid_busca <- function(texto, tabela = TRUE) {
   texto <- toupper(texto)
   df <- cid_subcat %>%
@@ -17,7 +15,6 @@ cid_busca <- function(texto, tabela = TRUE) {
   } else {
     df$subcat
   }
-
 }
 
 
