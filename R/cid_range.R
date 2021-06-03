@@ -1,8 +1,13 @@
 #' Função cid_range
 #'
-#' Captura um range de CIDs. Recebe 2 arumentos:
+#' Captura um range de CIDs, retornando uma tabela (data frame)
+#'
+#' Argumentos:
+#'
 #' cat_inicial: subcategoria do cid, em formato texto. Aceita receber como somente 1 letra,
-#' uma letra e um número, ou 2 ou 3 números, aumentando sempre a especificidade.
+#' uma letra e um número, ou 2 ou 3 números.
+#' Exemplo: "A1" irá capturar todos os CIDS que começem por A1 (A1 até A199, se existirem)
+#'
 #' cat_inf: a categoria que ira ser o final do range, no mesmo formato que a anterior.
 #'
 #' Essa função pressupõe uma ordem nos CIDs, de A a Z e ordenada conforme os números,
@@ -14,8 +19,11 @@
 #'
 #' @export
 
-cid_range <- function(cat_inic, cat_final) {
+cid_range <- function(cat_inic, cat_final = NA, cid = FALSE) {
 
+  if(is.na(cat_final)) {
+    cat_final = cat_inic
+  }
 
   cat_sup <- toupper(cat_inic)
   cat_inf <- toupper(cat_final)
@@ -31,6 +39,14 @@ cid_range <- function(cat_inic, cat_final) {
   if(indice_sup > indice_inf) {
     return("Categoria inicial é posterior a categoria final")
   }
+
+  if(cid) {
+    return(cid_subcat %>%
+             slice(indice_sup:indice_inf) %>%
+             pull(subcat)
+    )
+  }
+
   cid_subcat %>%
     slice(indice_sup:indice_inf)
 
