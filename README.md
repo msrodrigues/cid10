@@ -9,4 +9,4 @@ Contém as seguintes tabelas:
 
 # Instalação
 
-Atualmente o pacote não se encontra no CRAN. Para instala-lo é necessário o pacote `<addr>`devtools
+Atualmente o pacote não se encontra no CRAN. Para instala-lo é necessário o pacote `devtools`
