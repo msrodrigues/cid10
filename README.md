@@ -14,8 +14,16 @@ Para instalar o `devtools` usar o seguinte comando:
 
 `install.packages("devtools")`
 
-Após a instalação do pacote, para instalar o pacote cid10:
+Após a instalação do pacote `devtools`, para instalar o pacote `cid10`, direto do _github_:
 
 ```r
 devtools::install_git(url = "http://github.com/msrodrigues/cid10.git")
+```
+
+Após esta etapa o pacote estará pronto para ser utilizado, bastando que seja carregado:
+
+````
+library(cid10)
+```
+
 

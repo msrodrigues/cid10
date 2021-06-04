@@ -39,6 +39,7 @@
 NULL
 
 
+
 #' Tabela com as subcategorias do CID 10
 #'
 #' Trata-se de um dataset de 10.416 linhas  e 11 colinas, é a tabela mais completa do CID 10, com as
