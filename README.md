@@ -11,13 +11,16 @@ Contém as seguintes tabelas:
  - cid_grupos: Tabela com os **grupos** do CID 10, com a categoria inicial e categoria final
  - cid_categorias: tabela com as **categorias** do CID 10
  - cid_subcat: tabela com todas as **categorias** e **subcategorias** do CID 10, é a tabela completa.
- - cid_aps: Tabela dos códigos CID de condições
+ - cid_tabela_aps: Tabela dos códigos CID de condições sensíveis a atenção primária
+
+Também similar a `cid_tabela_aps` está disponível no pacote o vetor `cid_aps`, com todos os CIDs de 
+condições sensíveis a atenção primária.
 
  ### Funções
  
  Acompanha o pacote 2 funções que auxiliam a manipulação das tabelas do CID 10. 
  
- `cid_busca` e `cid_range`
+ `cid_busca()` e `cid_range()`
  
 
 # Instalação
