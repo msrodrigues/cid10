@@ -9,4 +9,7 @@ Contém as seguintes tabelas:
 
 # Instalação
 
-Atualmente o pacote não se encontra no CRAN. Para instala-lo é necessário o pacote `devtools`
+Atualmente o pacote não se encontra no CRAN. Para instala-lo é necessário o pacote `devtools`. 
+Para instalar o `devtool` usar o seguinte comando:
+
+`install.packages("devtools")`
