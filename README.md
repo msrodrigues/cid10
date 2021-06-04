@@ -12,7 +12,9 @@ Contém as seguintes tabelas:
 Atualmente o pacote não se encontra no CRAN. Para instala-lo é necessário o pacote `devtools`. 
 Para instalar o `devtools` usar o seguinte comando:
 
-`install.packages("devtools")`
+```r
+install.packages("devtools")
+```
 
 Após a instalação do pacote `devtools`, para instalar o pacote `cid10`, direto do _github_:
 
