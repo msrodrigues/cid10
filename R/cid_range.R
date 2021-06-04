@@ -17,6 +17,11 @@
 #' cid_range("A104", "B19") retorna um range válido
 #' cid_range("B19", "A104") retorna um erro pq a categoria inicial é posterior a categoria final.
 #'
+#' @author Marcio Rodrigues \email{msrodrigues@gmail.com}
+#' @references \url{https://github.com/msrodrigues}
+#' @keywords data, cid10
+#'
+#'
 #' @export
 
 cid_range <- function(cat_inic, cat_final = NA, cid = FALSE) {
@@ -29,11 +34,11 @@ cid_range <- function(cat_inic, cat_final = NA, cid = FALSE) {
   cat_inf <- toupper(cat_final)
 
   indice_sup <- cid_subcat %>%
-    filter(grepl(cat_sup, subcat)) %>%
+    filter(grepl(cat_sup, cid)) %>%
     pull(indice) %>% min
 
   indice_inf <- cid_subcat %>%
-    filter(grepl(cat_inf, subcat)) %>%
+    filter(grepl(cat_inf, cid)) %>%
     pull(indice) %>% max
 
   if(indice_sup > indice_inf) {
@@ -43,7 +48,7 @@ cid_range <- function(cat_inic, cat_final = NA, cid = FALSE) {
   if(cid) {
     return(cid_subcat %>%
              slice(indice_sup:indice_inf) %>%
-             pull(subcat)
+             pull(cid)
     )
   }
 

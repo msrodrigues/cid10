@@ -36,6 +36,11 @@ cid_capitulos <- read_delim(file = "data-raw/CID-10-CAPITULOS.CSV", delim = ";",
   select(-x6) %>%
   mutate(
     abrev = str_remove(descricao, "(^(.)* - )")
+  ) %>%
+  rename(
+    capitulo = numcap,
+    cat_ini = catinic,
+    cat_fim = catfim
   )
 
 
@@ -57,7 +62,11 @@ cid_categorias <- read_delim(file = "data-raw/CID-10-CATEGORIAS.CSV", delim = ";
 cid_grupos <- read_delim(file = "data-raw/CID-10-GRUPOS.CSV", delim = ";",
                              locale = locale(encoding = "Windows-1252")) %>%
   clean_names() %>%
-  select(-x5)
+  select(-x5) %>%
+  rename(
+    cat_ini = catinic,
+    cat_fim = catfim
+  )
 
 
 
@@ -65,15 +74,38 @@ cid_grupos <- read_delim(file = "data-raw/CID-10-GRUPOS.CSV", delim = ";",
 
 
 # carregamento
-cid_subcat <- read_delim(file = "data-raw/CID-10-SUBCATEGORIAS.CSV", delim = ";",
+cid_subcat_raw <- read_delim(file = "data-raw/CID-10-SUBCATEGORIAS.CSV", delim = ";",
                          locale = locale(encoding = "Windows-1252")) %>%
   clean_names() %>%
   select(-x9) %>%
   mutate(
     subcat_ord = fct_inorder(subcat, ordered = TRUE),
     indice = 1:nrow(.)
+  ) %>%
+  rename(
+    cid = subcat,
+    cid_ord = subcat_ord
   )
 
+
+
+cat_ini <- cid_capitulos %>%
+  pull(cat_ini)
+
+cat_fim <- cid_capitulos %>%
+  pull(cat_fim)
+
+lista_cids_cap <- map2(cat_ini, cat_fim, ~ cid_range(.x, .y, cid = TRUE))
+
+names(lista_cids_cap) <- map_chr(seq(1:22), ~ glue::glue("{.x}"))
+
+
+cid_cap <- stack(lista_cids_cap) %>%
+  rename("cid" = values, "cap" = ind)
+
+
+cid_subcat <- left_join(cid_subcat_raw, cid_cap, by = c("cid" )) %>%
+  mutate(capitulo = as.numeric(as.character(cap)))
 
 
 # Função cid_range --------------------------------------------------------
@@ -198,7 +230,8 @@ cid_aps <- c(cid_range("A37", cid = TRUE),
 ) %>% unique %>% sort
 
 cid_tabela_aps <- cid_subcat %>%
-  filter(subcat %in% cid_aps)
+  filter(cid %in% cid_aps)
+
 
 ## code to prepare `DATASET` dataset goes here
 
@@ -208,6 +241,6 @@ usethis::use_data(cid_grupos, overwrite = TRUE)
 usethis::use_data(cid_subcat, overwrite = TRUE)
 usethis::use_data(cid_aps, overwrite = TRUE)
 usethis::use_data(cid_tabela_aps, overwrite = TRUE)
-
+usethis::use_data(cid_aps, overwrite = TRUE)
 
 

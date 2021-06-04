@@ -25,3 +25,11 @@ Exemplo:
 cid_range("A104", "B19") retorna um range válido
 cid_range("B19", "A104") retorna um erro pq a categoria inicial é posterior a categoria final.
 }
+\references{
+\url{https://github.com/msrodrigues}
+}
+\author{
+Marcio Rodrigues \email{msrodrigues@gmail.com}
+}
+\keyword{cid10}
+\keyword{data,}
