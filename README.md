@@ -18,12 +18,14 @@ Após a instalação do pacote `devtools`, para instalar o pacote `cid10`, diret
 
 ```r
 devtools::install_git(url = "http://github.com/msrodrigues/cid10.git")
+
 ```
 
 Após esta etapa o pacote estará pronto para ser utilizado, bastando que seja carregado:
 
 ````
 library(cid10)
+
 ```
 
 
