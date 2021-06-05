@@ -243,4 +243,3 @@ usethis::use_data(cid_aps, overwrite = TRUE)
 usethis::use_data(cid_tabela_aps, overwrite = TRUE)
 usethis::use_data(cid_aps, overwrite = TRUE)
 
-

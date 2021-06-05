@@ -49,7 +49,7 @@ cid_busca <- function(texto, tabela = TRUE) {
   if(tabela) {
     return(df)
   } else {
-    df$subcat
+    df$cid
   }
 }
 
