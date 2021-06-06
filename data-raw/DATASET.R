@@ -110,14 +110,22 @@ cid_subcat <- left_join(cid_subcat_raw, cid_cap, by = c("cid" )) %>%
 
 # Função cid_range --------------------------------------------------------
 
-cid_range <- function(cat_inic, cat_final = NA, cid = FALSE) {
+cid_range <- function(cat_inic, cat_final = NA, cid = FALSE)
+{
 
   if(is.na(cat_final)) {
     cat_final = cat_inic
   }
 
-  cat_sup <- toupper(cat_inic)
-  cat_inf <- toupper(cat_final)
+  cat_sup = toupper(cat_inic)
+  cat_inf = toupper(cat_final)
+
+
+  if(cat_sup > cat_inf) {
+    aux = cat_sup
+    cat_sup = cat_inf
+    cat_inf = aux
+  }
 
   indice_sup <- cid_subcat %>%
     filter(grepl(cat_sup, cid)) %>%
@@ -126,10 +134,6 @@ cid_range <- function(cat_inic, cat_final = NA, cid = FALSE) {
   indice_inf <- cid_subcat %>%
     filter(grepl(cat_inf, cid)) %>%
     pull(indice) %>% max
-
-  if(indice_sup > indice_inf) {
-    return("Categoria inicial é posterior a categoria final")
-  }
 
   if(cid) {
     return(cid_subcat %>%

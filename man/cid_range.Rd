@@ -6,24 +6,66 @@
 \usage{
 cid_range(cat_inic, cat_final = NA, cid = FALSE)
 }
-\description{
-Captura um range de CIDs, retornando uma tabela (data frame)
+\arguments{
+\item{cat_inici:}{Grupo, categoria iy subcategoria do cid, em formato texto. Aceita receber como somente 1 letra,
+uma letra e um número, ou 2 ou 3 números.}
+
+\item{cat_final:}{Grupo, categoria iy subcategoria do cid, em formato texto. Aceita receber como somente 1 letra,
+uma letra e um número, ou 2 ou 3 números.}
+
+\item{cid:}{Booleano (TRUE/FALSE), Default é FALSE, quando TRUE ao invés de retornar a tabela, retorna um vetor de strings com os CIDs do range.}
 }
-\details{
-Argumentos:
+\description{
+Captura um range de CIDs, retornando uma tabela (data frame) ou um vetor de strings com os CIDs do intervalo.
+}
+\examples{
 
-cat_inicial: subcategoria do cid, em formato texto. Aceita receber como somente 1 letra,
-uma letra e um número, ou 2 ou 3 números.
-Exemplo: "A1" irá capturar todos os CIDS que começem por A1 (A1 até A199, se existirem)
+cid_range("B012", "B02")
+# A tibble: 10 x 12
+  cid   classif restrsexo causaobito descricao    descrabrev  refer excluidos cid_ord indice cap   capitulo
+  <chr> <chr>   <chr>     <chr>      <chr>        <chr>       <chr> <chr>     <ord>    <int> <fct>    <dbl>
+1 B012  +       NA        NA         Pneumopatia… B01.2 Pneu… J17.… NA        B012       404 1            1
+2 B018  NA      NA        NA         Varicela co… B01.8 Vari… NA    NA        B018       405 1            1
+3 B019  NA      NA        NA         Varicela se… B01.9 Vari… NA    NA        B019       406 1            1
+4 B020  +       NA        NA         Encefalite … B02.0 Ence… G05.… NA        B020       407 1            1
+5 B021  +       NA        NA         Meningite p… B02.1 Meni… G02.… NA        B021       408 1            1
+6 B022  +       NA        NA         Herpes zost… B02.2 Herp… NA    NA        B022       409 1            1
+7 B023  NA      NA        NA         Herpes zost… B02.3 Herp… NA    NA        B023       410 1            1
+8 B027  NA      NA        NA         Herpes zost… B02.7 Herp… NA    NA        B027       411 1            1
+9 B028  NA      NA        NA         Herpes zost… B02.8 Herp… NA    NA        B028       412 1            1
+10 B029  NA      NA        NA         Herpes zost… B02.9 Herp… NA    NA        B029       413 1            1
 
-cat_inf: a categoria que ira ser o final do range, no mesmo formato que a anterior.
 
-Essa função pressupõe uma ordem nos CIDs, de A a Z e ordenada conforme os números,
-na mesma ordem da lista global de cids. A cat_inicial deve preceder a cat_final
+cid_range("B012")
+ # A tibble: 1 x 12
+   cid   classif restrsexo causaobito descricao    descrabrev   refer excluidos cid_ord indice cap   capitulo
+   <chr> <chr>   <chr>     <chr>      <chr>        <chr>        <chr> <chr>     <ord>    <int> <fct>    <dbl>
+ 1 B012  +       NA        NA         Pneumopatia… B01.2 Pneum… J17.… NA        B012       404 1            1
 
-Exemplo:
-cid_range("A104", "B19") retorna um range válido
-cid_range("B19", "A104") retorna um erro pq a categoria inicial é posterior a categoria final.
+
+cid_range("B02")
+ # A tibble: 7 x 12
+   cid   classif restrsexo causaobito descricao    descrabrev   refer excluidos cid_ord indice cap   capitulo
+   <chr> <chr>   <chr>     <chr>      <chr>        <chr>        <chr> <chr>     <ord>    <int> <fct>    <dbl>
+ 1 B020  +       NA        NA         Encefalite … B02.0 Encef… G05.… NA        B020       407 1            1
+ 2 B021  +       NA        NA         Meningite p… B02.1 Menin… G02.… NA        B021       408 1            1
+ 3 B022  +       NA        NA         Herpes zost… B02.2 Herpe… NA    NA        B022       409 1            1
+ 4 B023  NA      NA        NA         Herpes zost… B02.3 Herpe… NA    NA        B023       410 1            1
+ 5 B027  NA      NA        NA         Herpes zost… B02.7 Herpe… NA    NA        B027       411 1            1
+ 6 B028  NA      NA        NA         Herpes zost… B02.8 Herpe… NA    NA        B028       412 1            1
+ 7 B029  NA      NA        NA         Herpes zost… B02.9 Herpe… NA    NA        B029       413 1            1
+ >
+
+cid_range("B02", cid = TRUE)
+[1] "B020" "B021" "B022" "B023" "B027" "B028" "B029"
+
+
+
+cid_range("B000", "A921", cid = TRUE)
+ [1] "A921" "A922" "A923" "A924" "A928" "A929" "A930" "A931" "A932" "A938" "A94"  "A950" "A951" "A959"
+[15] "A960" "A961" "A962" "A968" "A969" "A980" "A981" "A982" "A983" "A984" "A985" "A988" "A99"  "B000"
+
+
 }
 \references{
 \url{https://github.com/msrodrigues}
