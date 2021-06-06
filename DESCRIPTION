@@ -1,7 +1,7 @@
 Package: cid10
 Type: Package
 Title: Tabelas do CID10 (cid10)
-Version: 0.1.0
+Version: 0.1.1
 Author: Márcio da Silveira Rodrigues
 Maintainer: Márcio da Silveira Rodrigues <msrodrigues@gmail.com>
 Description: Classificação Internacional de Doenças - 10 versão
